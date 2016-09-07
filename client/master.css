@@ -20,36 +20,65 @@
   height: 200px;
   width: 600px;
   margin: auto;
-  border-radius: 10px;
 }
 #landingBodyPane .form-control{
   height: 60px;
   width: 525px;
   font-size:30px;
   font-weight: 100;
-  opacity: 0.5;
-  background-color: #d4d4d4
-  border-radius: 7px;
+  background-color: white;
 }
+
+input.geosuggest__input {
+		border-style: transparent !important;
+    width: 500px;
+	  -webkit-appearance: none;
+	  border: transparent;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+geosuggest[type=text]:focus {
+    width: 100%;
+}
+
+.geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0;
+}
+
+div.geosuggest__suggests-wrapper{
+	background-color: aliceblue
+}
+
 #landingLogo{
   width: 120px;
   height: auto;
   padding: 15px;
 }
+
 #navLogo{
   margin-top: -10px;
   width: 80px;
   height: auto;
 }
+
 #landingBody h1 {
   opacity: 1;
   color: white;
+	
   font-weight: 100;
   font-size: 50px;
   margin: 10px;
   margin-bottom: 20px;
 }
 
+#type-selector {
+	color: #fff;
+	background-color: #4d90fe;
+	padding: 5px 11px 0px 11px;
+}
 
 body {
   padding-top: 90px;
@@ -80,19 +109,22 @@ h1, h2, h3, h4  {
   margin: auto;
 }
 
+
 .form-group {
   border: 1px solid #f9f9f9;
   margin: 10px;
   border-radius: 5px;
 }
 .form-control {
-  border: 1px solid #f9f9f9;
+  border: 1px transparent;
   margin: 10px;
+	
 }
 .btn {
   border: 1px solid #f9f9f9;
   margin-left: 10px;
 }
+
 #CreateAndSearchTripsLeft{
   width: 50%;
   padding-left: 0px;
