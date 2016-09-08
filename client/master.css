@@ -221,7 +221,7 @@ p {
   display: flex;
   justify-content: center;
 }
-.googleMap {
+#Map {
   height: 100%;
   margin: 0;
 }

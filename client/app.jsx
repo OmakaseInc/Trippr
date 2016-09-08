@@ -8,7 +8,7 @@ import TripList from './src/components/tripList.jsx';
 import SearchBar from './src/components/searchBar.jsx';
 import NavBar from './src/components/navBar.jsx';
 import CreateTrip from './src/components/createTrip.jsx';
-import googleMap from './src/components/googleMap.jsx';
+import Directions from './src/components/googleMap.jsx';
 
 class App extends Component {
   constructor(props) {

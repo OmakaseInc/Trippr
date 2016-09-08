@@ -1,5 +1,6 @@
-import React from 'react'
-import {render} from 'react-dom';
+import React, {Component} from 'react';
+import ReactDom from 'react-dom';
+// import { GoogleMap, DirectionsRenderer } from "react-google-maps";
 import axios from 'axios'
 
 //  props: {
@@ -26,27 +27,55 @@ import axios from 'axios'
 //   ]
 // }
 
+//props inside directions: 
+ // var directionsObj = {
+ //      startSt: this.props.startSt,
+ //      startCity: this.props.startCity,
+ //      endSt: this.props.endSt,
+ //      endCity: this.props.endCity
+ //    }
+
+
+class Directions extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      resultsArray: [],
+    };
+    this.postGoogleDirections = this.postGoogleDirections.bind(this)
+  }
+    postGoogleDirections(){
+      console.log('props/params inside postGoogleDirections', this.props)
+      axios.post('/maps', {
+        data: this.props
+       })
+       .then(function(result) {
+        console.log('inside googleMap inside axios POST to /maps result: ',result)
+        console.log('inside googleMap inside axios POST to /maps result.start_location is: ',result.start_location)
+        // this.state.resultsArray = []
+        // resultsObj[this.props.id] = result
+        // resultsArray.push(resultsObj)
+        // this.state.origin = new google.maps.LatLng(result.start_location.lat, result.start_location.lng);
+        // this.state.destination = new google.maps.LatLng(result.start_location.lat, result.end_location.lng);
+       })
+       .catch(function(error) {
+        console.log('error inside googleMap inside axios Post to /maps ', error)
+       })
+    }
 
 
 
+  render() {
+    return (
+          <div id="map">
+          <button onClick={this.postGoogleDirections}>CLICK ME</button>
+          </div>
+    )
+  }
 
-const GoogleMap = (props) => {
-   console.log('***********props inside triplist', props)
-   axios.post('/maps', {
-    params: this.props
-   })
-   .then(function(result) {
-    console.log('inside googleMap inside axios POST to /maps result: ',result)
-   })
-   .catch(function(error) {
-    console.log('error inside googleMap inside axios Post to /maps ', error)
-   })
-
-
-	return (
-			<div className="googleMap"></div>
-		)
 }
 
-export default GoogleMap;	
+
+
+export default Directions
 
