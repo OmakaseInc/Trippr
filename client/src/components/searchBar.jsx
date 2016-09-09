@@ -22,7 +22,7 @@ class SearchBar extends Component {
 
   submitData() {
     this.props.infoStore(this.state);
-    this.setState({ endLocation: '',
+    this.setState({ endLocation: setEndLocation(),
                    startLocation: '',
                    numSeats: '',
                    seatPrice: '',
@@ -31,10 +31,22 @@ class SearchBar extends Component {
                  });
   }
 
+<<<<<<< HEAD
   componentDidMount(){
     this.submitData();
   }
   
+=======
+  setEndLocation(){
+    var wholeURL = (document.location.href);
+    var endLocation = (wholeURL.pathname).split("").filter(function(curr){
+      if(curr !== "/" || curr !== "+"){
+        return curr
+      }
+    })
+    console.log("url parsed", endLocation);
+  }
+>>>>>>> 7bf03bd6aff2d61b047b9f5f5c823eadde4b4d33
 
   render() {
     return (
