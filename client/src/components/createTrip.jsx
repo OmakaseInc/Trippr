@@ -159,8 +159,8 @@ class CreateTrip extends Component {
               </datalist>
               <input
               placeholder = "Vehicle Year"
-              id="carYear"
               list="carYears"
+              id="vehicleYear"
               value = {this.state.vehicleYear}
               onChange = {this.handleChange.bind(this, 'vehicleYear')} />
 
