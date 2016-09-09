@@ -68,10 +68,24 @@ geosuggest[type=text]:focus {
   overflow: hidden;
   border-width: 0;
 }
+input.geosuggest__input.app_addreess{
+  padding-left: 10px;
+  width: 440px;
+  height: 45px;
+}
 
 input.geosuggest__input.create_address {
-  width: 340px;
+  padding-left: 10px;
+  width: 100%;
   height: 45px;
+}
+
+input#vehicleYear{
+  padding-left: 10px;
+  width: 100%;
+  height: 45px;
+  border: transparent;
+
 }
 
 div.geosuggest__suggests-wrapper{

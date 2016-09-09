@@ -60,6 +60,7 @@ componentWillMount() {
       this.getTrips({endLocation: this.state.landingLocation})
       this.props.params.location = undefined;
       this.state.landingLocation = ''
+      
     }
 }
 
