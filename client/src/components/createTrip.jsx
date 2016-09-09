@@ -61,7 +61,6 @@ class CreateTrip extends Component {
     this.state.startSt = suggest.gmaps.address_components[0].long_name + space + suggest.gmaps.address_components[1].long_name;
     this.state.startCity = suggest.gmaps.address_components[3].long_name;
     this.state.startState = suggest.gmaps.address_components[5].short_name;
-    console.log(suggest, "Full obj");
   }
 
   onSuggestEndSelect(suggest){
