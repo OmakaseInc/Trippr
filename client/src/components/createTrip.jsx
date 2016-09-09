@@ -6,7 +6,6 @@ import Directions from './googleMap.jsx';
 import NavBar from './navBar.jsx';
 import Geosuggest from 'react-geosuggest';
 
-
 class CreateTrip extends Component {
   constructor(props) {
     super(props);
@@ -32,8 +31,7 @@ class CreateTrip extends Component {
     this.submitTrip = this.submitTrip.bind(this);
     this.onSuggestStartSelect = this.onSuggestStartSelect.bind(this);
     this.onSuggestEndSelect = this.onSuggestEndSelect.bind(this);
-  }
-
+}
 
   handleChange(name, e) {
     let change = {};
@@ -59,21 +57,18 @@ class CreateTrip extends Component {
   }
 
   onSuggestStartSelect(suggest){
-    this.state.startSt = suggest.gmaps.address_components[0].long_name + " " + suggest.gmaps.address_components[1].long_name;
+    var space = " ";
+    this.state.startSt = suggest.gmaps.address_components[0].long_name + space + suggest.gmaps.address_components[1].long_name;
     this.state.startCity = suggest.gmaps.address_components[3].long_name;
     this.state.startState = suggest.gmaps.address_components[5].short_name;
-    this.state.startLat = suggest.location.lat;
-    this.state.startLong = suggest.location.long;
     console.log(suggest, "Full obj");
   }
 
   onSuggestEndSelect(suggest){
-    this.state.endSt = suggest.gmaps.address_components[0].long_name  + " " + suggest.gmaps.address_components[1].long_name;
+    var space = " ";
+    this.state.endSt = suggest.gmaps.address_components[0].long_name  + space + suggest.gmaps.address_components[1].long_name;
     this.state.endCity = suggest.gmaps.address_components[3].long_name;
     this.state.endState = suggest.gmaps.address_components[5].short_name;
-    this.state.endLat = suggest.location.lat;
-    this.state.endLong = suggest.location.long;
-    renderGoogleMaps();
   };
 
 
@@ -98,6 +93,8 @@ class CreateTrip extends Component {
       console.log(error);
     });
   }
+
+
 
   render() {
     return (
@@ -128,20 +125,45 @@ class CreateTrip extends Component {
               <input
               placeholder = "Vehicle Make"
               className="form-control"
+              id="carMake"
+              list="cars"
               value = {this.state.vehicleMake}
               onChange = {this.handleChange.bind(this, 'vehicleMake')} />
 
               <input
               placeholder = "Vehicle Model"
               className="form-control"
+              id="carModel"
               value = {this.state.vehicleModel}
               onChange = {this.handleChange.bind(this, 'vehicleModel')} />
 
+              <datalist id="carYears">
+                  <option value="2000">2000</option>
+                  <option value="2001">2001</option>
+                  <option value="2002">2002</option>
+                  <option value="2003">2003</option>
+                  <option value="2004">2004</option>
+                  <option value="2005">2005</option>
+                  <option value="2006">2006</option>
+                  <option value="2007">2007</option>
+                  <option value="2008">2008</option>
+                  <option value="2009">2009</option>
+                  <option value="2010">2010</option>
+                  <option value="2011">2011</option>
+                  <option value="2012">2012</option>
+                  <option value="2013">2013</option>
+                  <option value="2014">2014</option>
+                  <option value="2015">2015</option>
+                  <option value="2016">2016</option>
+                  <option value="2017">2017</option>
+              </datalist>
               <input
               placeholder = "Vehicle Year"
-              className="form-control"
+              list="carYears"
+              id="vehicleYear"
               value = {this.state.vehicleYear}
               onChange = {this.handleChange.bind(this, 'vehicleYear')} />
+
           </div>
 
           <div className="col-md-6" id="CreateAndSearchTripsRight">
@@ -162,6 +184,8 @@ class CreateTrip extends Component {
               type = 'number'
               className="form-control"
               placeholder = "# of Seats"
+              min="1"
+              max="10"
               value = {this.state.numSeats}
               onChange = {this.handleChange.bind(this, 'numSeats')} />
 
@@ -169,6 +193,7 @@ class CreateTrip extends Component {
               type = 'number'
               className="form-control"
               placeholder = "Price per Seat"
+              max="999"
               value = {this.state.seatPrice}
               onChange = {this.handleChange.bind(this, 'seatPrice')} />
 
@@ -181,7 +206,7 @@ class CreateTrip extends Component {
               <input type = 'submit' value = 'Create' className='btn btn-primary'/>
           </div>
         </form>
-
+        
       </div>
     )
   }
