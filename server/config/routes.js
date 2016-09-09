@@ -13,10 +13,7 @@ module.exports = (app, express) => {
   */
 
   //GOOGLE MAPS
-  app.post('/maps',googleMapController.getMaps)
-
-
-
+  app.post('/maps',googleMapController.getMaps);
 
   app.post('/pay', paymentController.chargeCustomer);
   // Takes the following:
@@ -24,6 +21,13 @@ module.exports = (app, express) => {
   // req.body.exp_month,
   // req.body.exp_year,
   // req.body.cvc
+  // req.body.price
+  // Succes -> 200
+  // Failure -> 500
+
+  app.post('/transfer', paymentController.payDriver);
+  // Takes the following:
+  // req.body.price
   // Succes -> 200
   // Failure -> 500
 

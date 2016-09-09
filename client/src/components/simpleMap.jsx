@@ -27,7 +27,7 @@ export default class SimpleMap extends Component{
   // }
 
   render() {
-    if (this.props.results.start_address) { 
+    if (this.props.results.start_address) {
     var startObj = {
       defaultAnimation: 2,
       key: this.props.results.start_address,
@@ -60,12 +60,12 @@ export default class SimpleMap extends Component{
         <GoogleMap
           ref={(map) => console.log(map)}
           defaultZoom={3}
-          center={{ lat:  (this.props.centerPoints) ? this.props.centerPoints.avgLat: -31, 
+          center={{ lat:  (this.props.centerPoints) ? this.props.centerPoints.avgLat: -31,
                            lng: (this.props.centerPoints) ? this.props.centerPoints.avgLng: 22
                          }}
           onClick={this.props.onMapClick}
         >
-          
+
             <Marker
               {...startObj}
               onRightclick={() => this.props.onMarkerRightclick(index)}
@@ -81,4 +81,3 @@ export default class SimpleMap extends Component{
   )
   }
 }
-

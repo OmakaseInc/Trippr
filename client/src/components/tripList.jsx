@@ -2,7 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import Trip from './trip.jsx';
 import Directions from './googleMap.jsx'
-   
+
 
   const TripList = (props) => {
     console.log('Inside TripList props are', props)
@@ -16,7 +16,7 @@ import Directions from './googleMap.jsx'
          </div>
          <div className="tripContainer">
            {props.trips.map((trip, index) => {
-            return <Trip key={index} trip={trip} reserveSeat={props.reserveSeat}/>
+            return <Trip key={index} trip={trip} />
            })}
          </div>
         

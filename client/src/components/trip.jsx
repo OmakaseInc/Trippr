@@ -16,11 +16,11 @@ class Trip extends Component {
                    this.props.trip.driverName + '/' +
                    this.props.trip.startCity + '/' +
                    this.props.trip.endCity + '/' +
-                   this.props.trip.tripDate;
+                   this.props.trip.tripDate + '/' +
+                   this.props.trip.id + '/' +
+                   this.props.trip.seatPrice;
 
       browserHistory.push(link);
-      // use on payment page instead
-      // this.props.reserveSeat({passengerId: localStorage.getItem('id'), tripId: this.props.trip.id});
     }
 
     render() {

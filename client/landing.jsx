@@ -16,7 +16,7 @@ import Directions from './src/components/googleMap.jsx';
 class Landing extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       endLocation: '' ,
       endLocationLat: '',
       endLocationLong: ''
@@ -25,7 +25,7 @@ class Landing extends Component {
     this.onSuggestSelect = this.onSuggestSelect.bind(this);
   }
 
-  
+
   onSuggestSelect(suggest){
     var city = suggest.gmaps.address_components[0].long_name;
     var lat = suggest.location.lat;
@@ -56,7 +56,7 @@ class Landing extends Component {
             <h1> Where are you going? </h1>
               <form onSubmit={this.submitData}>
 
-                <Geosuggest 
+                <Geosuggest
                 type="text"
                 name="search"
                 className="form-control"
@@ -78,8 +78,8 @@ class Landing extends Component {
 render((
   <Router history={browserHistory}>
     <Route path='/' component={Landing} />
-    <Route path='app(/:endLocation)' name='app' component={App} />
-    <Route path='payment/:driver/:start/:end/:date' name='payment' component={Payment} />
+    <Route path='app(/:location)' name='app' component={App} />
+    <Route path='payment/:driver/:start/:end/:date/:id/:price' name='payment' component={Payment} />
     <Route path='create' component={CreateTrip} />
     <Route path='signUp' component={Signup} />
     <Route path='logOut' component={Logout} />

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {render} from 'react-dom';
 import axios from 'axios';
 import {browserHistory} from 'react-router';
+import moment from 'moment';
 
 import NavBar from './navBar.jsx';
 
@@ -24,6 +25,8 @@ class Payment extends Component {
     this.setState({start: this.props.params.start});
     this.setState({end: this.props.params.end});
     this.setState({date: this.props.params.date});
+    this.setState({id: this.props.params.id});
+    this.setState({price: this.props.params.price});
   }
 
   chargeCustomer() {
@@ -32,19 +35,50 @@ class Payment extends Component {
       "number": this.state.number,
       "exp_month": this.state.exp_month,
       "exp_year": this.state.exp_year,
-      "cvc": this.state.cvc
+      "cvc": this.state.cvc,
+      "price": this.state.price
     };
 
     axios.post('/pay', data)
     .then((response) => {
-      console.log(response);
       this.setState({page: 'paymentSuccess'});
+      this.reserveSeat({passengerId: localStorage.getItem('id'), tripId: this.state.id});
     })
     .catch((error) => {
-      console.log(error);
       this.setState({page: 'paymentFailure'});
     });
 
+  }
+
+  reserveSeat(reserveObj) {
+    if(localStorage.getItem('token')) {
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+    }
+
+    axios.post('/reserveSeat', reserveObj)
+    .then((response) => {
+      console.log('Seat reserved!', response.data);
+      // TO IMPLEMENT: HOLD OFF ON PAYING DRIVER UNTIL TRIP OVER (AND CONFIRMED)
+      // this.payDriver();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  payDriver() {
+    var data = {
+      "price": this.state.price,
+      "customerId": this.state.customerId
+    };
+
+    axios.post('/transfer', data)
+    .then((response) => {
+      console.log('Driver paid!', response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   handleNumberInput(evt) {
@@ -103,8 +137,6 @@ class Payment extends Component {
       return (
         <div>
           <NavBar />
-          <div className="container">
-           </div>
           <img src={'/car.gif'} className="spinner"/>
         </div>
       )
@@ -115,7 +147,7 @@ class Payment extends Component {
           <NavBar />
           <div className="container">
             <h1>You've got a spot!</h1>
-            <p>Thanks for your payment.  You are all set for your trip with {this.state.driver} from {this.state.start} to {this.state.end} on {this.state.date}.</p>
+            <p>Thanks for your payment.  You are all set for your trip with {this.state.driver} from {this.state.start} to {this.state.end} on {moment(this.state.date).format('MM-DD-YYYY')}.</p>
            </div>
         </div>
       )

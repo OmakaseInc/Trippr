@@ -54,22 +54,6 @@ class App extends Component {
     });
   }
 
-  reserveSeat(reserveObj) {
-    if(localStorage.getItem('token')) {
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
-    }
-    axios.post('/reserveSeat',
-      reserveObj
-    )
-    .then(function (response) {
-      console.log('Seat reserved!', response.data)
-      browserHistory.push('/userProfile')
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-  }
-
 componentWillMount() {
     if(this.props.params.location) {
       this.setState({landingLocation: this.props.params.location});
@@ -100,7 +84,7 @@ componentWillMount() {
             <h1>Detailed Search</h1>
             <SearchBar infoStore={this.infoStore}/>
           </div>
-          <TripList reserveSeat={this.reserveSeat} trips={this.state.tripResults}/>
+          <TripList trips={this.state.tripResults}/>
         </div>
       )
     }
