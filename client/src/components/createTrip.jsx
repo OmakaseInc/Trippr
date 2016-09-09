@@ -32,6 +32,10 @@ class CreateTrip extends Component {
     this.submitTrip = this.submitTrip.bind(this);
     this.onSuggestStartSelect = this.onSuggestStartSelect.bind(this);
     this.onSuggestEndSelect = this.onSuggestEndSelect.bind(this);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7bf03bd6aff2d61b047b9f5f5c823eadde4b4d33
   }
 
 
@@ -59,6 +63,7 @@ class CreateTrip extends Component {
   }
 
   onSuggestStartSelect(suggest){
+<<<<<<< HEAD
     this.state.startSt = suggest.gmaps.address_components[0].long_name + " " + suggest.gmaps.address_components[1].long_name;
     this.state.startCity = suggest.gmaps.address_components[3].long_name;
     this.state.startState = suggest.gmaps.address_components[5].short_name;
@@ -78,6 +83,19 @@ class CreateTrip extends Component {
 
 
 
+=======
+    this.state.startSt = suggest.gmaps.address_components[0].long_name + suggest.gmaps.address_components[1].long_name;
+    this.state.startCity = suggest.gmaps.address_components[3].long_name;
+    this.state.startState = suggest.gmaps.address_components[5].short_name;
+  };
+
+  onSuggestEndSelect(suggest){
+    this.state.endSt = suggest.gmaps.address_components[0].long_name + suggest.gmaps.address_components[1].long_name;
+    this.state.endCity = suggest.gmaps.address_components[3].long_name;
+    this.state.endState = suggest.gmaps.address_components[5].short_name;
+  };
+
+>>>>>>> 7bf03bd6aff2d61b047b9f5f5c823eadde4b4d33
   makeTrip(tripObj) {
     if(localStorage.getItem('token')) {
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
@@ -107,15 +125,28 @@ class CreateTrip extends Component {
           <h1>Create Your Trip</h1>
           <div className="col-md-6" id="CreateAndSearchTripsLeft">
               <label for="startAddress">Start Address</label>
+<<<<<<< HEAD
             <Geosuggest 
                 type="text"
                 inputClassName="create_address"
                 name= "startAddress"
+=======
+
+
+              <Geosuggest 
+                type="text"
+                name= "startAddress"
+                className="form-control"
+>>>>>>> 7bf03bd6aff2d61b047b9f5f5c823eadde4b4d33
                 placeholder = "Enter a start address"
                 onSuggestSelect={this.onSuggestStartSelect}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
+<<<<<<< HEAD
             />
+=======
+              />
+>>>>>>> 7bf03bd6aff2d61b047b9f5f5c823eadde4b4d33
 
             <label for="driverInfo">Driver Information</label>
             <input
@@ -124,6 +155,7 @@ class CreateTrip extends Component {
               className="form-control"
               value = {this.state.tripDate}
               onChange = {this.handleChange.bind(this, 'tripDate')} />
+<<<<<<< HEAD
 
               <input
               placeholder = "Vehicle Make"
@@ -178,6 +210,62 @@ class CreateTrip extends Component {
               value = {this.state.description}
               onChange = {this.handleChange.bind(this, 'description')} />
 
+=======
+
+              <input
+              placeholder = "Vehicle Make"
+              className="form-control"
+              value = {this.state.vehicleMake}
+              onChange = {this.handleChange.bind(this, 'vehicleMake')} />
+
+              <input
+              placeholder = "Vehicle Model"
+              className="form-control"
+              value = {this.state.vehicleModel}
+              onChange = {this.handleChange.bind(this, 'vehicleModel')} />
+
+              <input
+              placeholder = "Vehicle Year"
+              className="form-control"
+              value = {this.state.vehicleYear}
+              onChange = {this.handleChange.bind(this, 'vehicleYear')} />
+          </div>
+
+          <div className="col-md-6" id="CreateAndSearchTripsRight">
+            <label for="endAddress">End Address</label>
+
+              <Geosuggest 
+                type="text"
+                name= "endAddress"
+                className="form-control"
+                placeholder = "Enter an end address"
+                onSuggestSelect={this.onSuggestEndSelect}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+              />
+
+            <label for="tripDetails">Trip Details</label>
+            <input
+              type = 'number'
+              className="form-control"
+              placeholder = "# of Seats"
+              value = {this.state.numSeats}
+              onChange = {this.handleChange.bind(this, 'numSeats')} />
+
+            <input
+              type = 'number'
+              className="form-control"
+              placeholder = "Price per Seat"
+              value = {this.state.seatPrice}
+              onChange = {this.handleChange.bind(this, 'seatPrice')} />
+
+              <input
+              placeholder = "Description"
+              className="form-control"
+              value = {this.state.description}
+              onChange = {this.handleChange.bind(this, 'description')} />
+
+>>>>>>> 7bf03bd6aff2d61b047b9f5f5c823eadde4b4d33
               <input type = 'submit' value = 'Create' className='btn btn-primary'/>
           </div>
         </form>

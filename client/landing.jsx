@@ -28,6 +28,7 @@ class Landing extends Component {
   
   onSuggestSelect(suggest){
     var city = suggest.gmaps.address_components[0].long_name;
+<<<<<<< HEAD
     var lat = suggest.location.lat;
     var long = suggest.location.long;
     console.log(suggest, "Full obj");
@@ -37,6 +38,10 @@ class Landing extends Component {
       endLocationLong: long
     });
 
+=======
+    console.log(suggest, "Full obj");
+    this.setState( {endLocation: city} );
+>>>>>>> 7bf03bd6aff2d61b047b9f5f5c823eadde4b4d33
   }
 
   submitData(e) {
@@ -46,7 +51,10 @@ class Landing extends Component {
   }
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7bf03bd6aff2d61b047b9f5f5c823eadde4b4d33
   render() {
     return (
       <div id="landingBody">
