@@ -77,7 +77,6 @@ class SearchBar extends Component {
           className="form-control"
           id="theDate"
           placeholder = "Starting date"
-          value = "{this.state.startDate}"
           onChange = {this.handleChange.bind(this, 'startDate')}/>
 
         <input

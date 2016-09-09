@@ -1,5 +1,4 @@
 module.exports = {
-    devtool: "eval-source-map",
     entry: "./client/landing.jsx",
     output: {
         path: __dirname + "/client",
