@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import Geosuggest from 'react-geosuggest';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -12,6 +13,9 @@ class SearchBar extends Component {
                    endDate: ''
                  };
     this.submitData = this.submitData.bind(this);
+    this.onSuggestStartSelect = this.onSuggestStartSelect.bind(this);
+    this.onSuggestEndSelect = this.onSuggestEndSelect.bind(this);
+    this.getTodaysDate = this.getTodaysDate.bind(this);
   }
 
   handleChange(name, e) {
@@ -26,43 +30,54 @@ class SearchBar extends Component {
                    startLocation: '',
                    numSeats: '',
                    seatPrice: '',
-                   startDate: '',
                    endDate: ''
                  });
   }
-
-<<<<<<< HEAD
   componentDidMount(){
-    this.submitData();
+    this.getTodaysDate();
   }
-  
-=======
-  setEndLocation(){
-    var wholeURL = (document.location.href);
-    var endLocation = (wholeURL.pathname).split("").filter(function(curr){
-      if(curr !== "/" || curr !== "+"){
-        return curr
-      }
-    })
-    console.log("url parsed", endLocation);
+  onSuggestStartSelect(suggest){
+    var space = " ";
+    this.state.startLocation = suggest.gmaps.address_components[3].long_name + space + suggest.gmaps.address_components[5].short_name;
   }
->>>>>>> 7bf03bd6aff2d61b047b9f5f5c823eadde4b4d33
 
+  onSuggestEndSelect(suggest){
+    var space = " ";
+    this.state.endLocation = suggest.gmaps.address_components[3].long_name + space + suggest.gmaps.address_components[5].short_name;
+  };
+
+  getTodaysDate(){
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    var today = year + "-" + month + "-" + day;       
+    document.getElementById("theDate").value = today;
+  }
   render() {
     return (
       <form className="form-group">
       <div className="col-md-6" id="CreateAndSearchTripsLeft">
-        <input
-          placeholder = "Starting city/state"
-          className="form-control"
-          value = {this.state.startLocation}
-          onChange = {this.handleChange.bind(this, 'startLocation')} />
+            <Geosuggest 
+                type="text"
+                inputClassName="app_addreess"
+                name= "startAddress"
+                placeholder = "Starting Address"
+                onSuggestSelect={this.onSuggestStartSelect}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+            />
 
         <input
           type = "date"
           className="form-control"
+          id="theDate"
           placeholder = "Starting date"
-          value = {this.state.startDate}
+          value = "{this.state.startDate}"
           onChange = {this.handleChange.bind(this, 'startDate')}/>
 
         <input
@@ -74,12 +89,15 @@ class SearchBar extends Component {
       </div>
 
       <div className="col-md-6" id="CreateAndSearchTripsRight">
-        <input
-          placeholder = "Ending city/state"
-          className="form-control"
-          value = {this.state.endLocation}
-          onChange = {this.handleChange.bind(this, 'endLocation')} />
-
+         <Geosuggest 
+                type="text"
+                name= "endAddress"
+                inputClassName="app_addreess"
+                placeholder = "End Address"
+                onSuggestSelect={this.onSuggestEndSelect}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+        />
         <input
           type = "date"
           className="form-control"
@@ -90,6 +108,8 @@ class SearchBar extends Component {
         <input
           type = "number"
           className="form-control"
+          min="1"
+          max="999"
           placeholder = "Max budget?"
           value = {this.state.seatPrice}
           onChange = {this.handleChange.bind(this, 'seatPrice')}/>

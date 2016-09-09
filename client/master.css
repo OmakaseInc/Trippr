@@ -68,6 +68,10 @@ geosuggest[type=text]:focus {
   overflow: hidden;
   border-width: 0;
 }
+input.geosuggest__input.app_addreess{
+  width: 440px;
+  height: 45px;
+}
 
 input.geosuggest__input.create_address {
   width: 340px;
@@ -243,7 +247,7 @@ p {
 
 #tryGoogleMap {
   height: 500px;
-  width: 500px;
+  width: 607px;
   margin: 0;
   border: 1px black solid;
 }

@@ -18,8 +18,7 @@ class Landing extends Component {
     super(props);
     this.state = { 
       endLocation: '' ,
-      endLocationLat: '',
-      endLocationLong: ''
+
   };
     this.submitData = this.submitData.bind(this);
     this.onSuggestSelect = this.onSuggestSelect.bind(this);
@@ -28,20 +27,11 @@ class Landing extends Component {
   
   onSuggestSelect(suggest){
     var city = suggest.gmaps.address_components[0].long_name;
-<<<<<<< HEAD
-    var lat = suggest.location.lat;
-    var long = suggest.location.long;
     console.log(suggest, "Full obj");
     this.setState( {
       endLocation: city,
-      endLocationLat: lat,
-      endLocationLong: long
     });
 
-=======
-    console.log(suggest, "Full obj");
-    this.setState( {endLocation: city} );
->>>>>>> 7bf03bd6aff2d61b047b9f5f5c823eadde4b4d33
   }
 
   submitData(e) {
@@ -51,10 +41,6 @@ class Landing extends Component {
   }
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 7bf03bd6aff2d61b047b9f5f5c823eadde4b4d33
   render() {
     return (
       <div id="landingBody">
@@ -78,7 +64,6 @@ class Landing extends Component {
               </form>
           </div>
         </div>
-        <Directions latLong={this.state}/>
       </div>
 
     )
